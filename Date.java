@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Date {
@@ -158,10 +157,10 @@ public class Date {
   }
 
   private boolean checkForMonth(String month) {
-    return (month.equals("January") || month.equals("February") || month.equals("March")
-        || month.equals("April") || month.equals("May") || month.equals("June")
-        || month.equals("July") || month.equals("August") || month.equals("September")
-        || month.equals("October") || month.equals("November") || month.equals("December"));
+    return switch (month) {
+      case "January", "February", "March", "April", "May", "August", "September", "October", "November", "December" -> true;
+      default -> false;
+    };
   }
 
   private String monthString(int monthNumber) {
