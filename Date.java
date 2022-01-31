@@ -37,7 +37,7 @@ public class Date {
   }
 
   public void setDate(int monthInt, int day, int year) {
-    if (dateOK(monthInt, day, year)) {
+    if (checkForDate(monthInt, day, year)) {
       this.month = monthString(monthInt);
       this.day = day;
       this.year = year;
@@ -48,7 +48,7 @@ public class Date {
   }
 
   public void setDate(String monthString, int day, int year) {
-    if (dateOK(monthString, day, year)) {
+    if (checkForDate(monthString, day, year)) {
       this.month = monthString;
       this.day = day;
       this.year = year;
@@ -120,11 +120,11 @@ public class Date {
     return (month + " " + day + ", " + year);
   }
 
-  public boolean equals(Date otherDate) {
+  public boolean checkIfEquals(Date otherDate) {
     return ((month.equals(otherDate.month)) && (day == otherDate.day) && (year == otherDate.year));
   }
 
-  public boolean precedes(Date otherDate) {
+  public boolean checkIfPrecedes(Date otherDate) {
     return ((year < otherDate.year) || (year == otherDate.year && getMonth() < otherDate.getMonth())
         || (year == otherDate.year && month.equals(otherDate.month) && day < otherDate.day));
   }
@@ -138,7 +138,7 @@ public class Date {
       String monthInput = keyboard.next();
       var dayInput = keyboard.nextInt();
       var yearInput = keyboard.nextInt();
-      if (dateOK(monthInput, dayInput, yearInput)) {
+      if (checkForDate(monthInput, dayInput, yearInput)) {
         setDate(monthInput, dayInput, yearInput);
         tryAgain = false;
       } else
@@ -147,17 +147,17 @@ public class Date {
     keyboard.close(); // Scanner never closed in original file
   }
 
-  private boolean dateOK(int monthInt, int dayInt, int yearInt) {
+  private boolean checkForDate(int monthInt, int dayInt, int yearInt) {
     return ((monthInt >= 1) && (monthInt <= 12) && (dayInt >= 1) && (dayInt <= 31)
         && (yearInt >= 1000) && (yearInt <= 9999));
   }
 
-  private boolean dateOK(String monthString, int dayInt, int yearInt) {
-    return (monthOK(monthString) && (dayInt >= 1) && (dayInt <= 31) && (yearInt >= 1000)
+  private boolean checkForDate(String monthString, int dayInt, int yearInt) {
+    return (checkForMonth(monthString) && (dayInt >= 1) && (dayInt <= 31) && (yearInt >= 1000)
         && (yearInt <= 9999));
   }
 
-  private boolean monthOK(String month) {
+  private boolean checkForMonth(String month) {
     return (month.equals("January") || month.equals("February") || month.equals("March")
         || month.equals("April") || month.equals("May") || month.equals("June")
         || month.equals("July") || month.equals("August") || month.equals("September")
